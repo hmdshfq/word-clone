@@ -15,7 +15,7 @@ function Game() {
             class='guess-input-wrapper'
             onSubmit={(e) => {
                 e.preventDefault();
-                console.log(value.toUpperCase());
+                console.log(value);
                 setValue('');
             }}
         >
@@ -27,7 +27,7 @@ function Game() {
                 minLength={5}
                 maxLength={5}
                 onChange={(e) => {
-                    setValue(e.target.value);
+                    setValue(e.target.value.toUpperCase());
                 }}
             />
         </form>
