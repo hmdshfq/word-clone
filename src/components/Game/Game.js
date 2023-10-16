@@ -8,29 +8,36 @@ const answer = sample(WORDS);
 // To make debugging easier, we'll log the solution in the console.
 console.info({ answer });
 
-function Game() {
+function Game({ guesses, setGuesses }) {
     const [value, setValue] = React.useState('');
     return (
-        <form
-            class='guess-input-wrapper'
-            onSubmit={(e) => {
-                e.preventDefault();
-                console.log(value);
-                setValue('');
-            }}
-        >
-            <label for='guess-input'>Enter guess:</label>
-            <input
-                id='guess-input'
-                type='text'
-                value={value}
-                minLength={5}
-                maxLength={5}
-                onChange={(e) => {
-                    setValue(e.target.value.toUpperCase());
+        <>
+            <form
+                class='guess-input-wrapper'
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    console.log(value);
+                    const nextGuesses = [
+                        ...guesses,
+                        { id: crypto.randomUUID(), value },
+                    ];
+                    setGuesses(nextGuesses);
+                    setValue('');
                 }}
-            />
-        </form>
+            >
+                <label for='guess-input'>Enter guess:</label>
+                <input
+                    id='guess-input'
+                    type='text'
+                    value={value}
+                    minLength={5}
+                    maxLength={5}
+                    onChange={(e) => {
+                        setValue(e.target.value.toUpperCase());
+                    }}
+                />
+            </form>
+        </>
     );
 }
 
