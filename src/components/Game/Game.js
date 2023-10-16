@@ -9,7 +9,29 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
-  return <>Put a game here!</>;
+    const [value, setValue] = React.useState('');
+    return (
+        <form
+            class='guess-input-wrapper'
+            onSubmit={(e) => {
+                e.preventDefault();
+                console.log(value.toUpperCase());
+                setValue('');
+            }}
+        >
+            <label for='guess-input'>Enter guess:</label>
+            <input
+                id='guess-input'
+                type='text'
+                value={value}
+                minLength={5}
+                maxLength={5}
+                onChange={(e) => {
+                    setValue(e.target.value);
+                }}
+            />
+        </form>
+    );
 }
 
 export default Game;
